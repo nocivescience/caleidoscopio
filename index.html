@@ -6,8 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    html{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f1f1f1;
+        font-family: 'Montserrat', sans-serif;
+        animation: identifier 2s infinite;
+    }
+    @keyframes identifier {
+        0%, 100% {
+            background-color: #f1f1f1;
+        }
+        50% {
+            background-color: #f3fc6d;
+        }
+    }
+    @media (max-width: 500px){
+        h1{
+            font-size: 1.5rem;
+        }
+        p{
+            font-size: 0.8rem;
+        }
+        body{
+            width: 300px;
+        }
+    }
+    div{
+        margin-bottom: 20px;
+    }
+    canvas{
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+</style>
 <body>
+    <h1>Reflective Symmetry</h1>
+    <p>Move the cursor around the canvas and click to draw reflective lines.</p>
+    <p>Press any key to clear the canvas.</p>
+    <div>
+        <label for="">Borrar</label>
+        <button id="clear">Borrar</button>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js"
         integrity="sha512-0zGLOFv/+OQ6YfVCSGDQWhrDRx0ONmBqWvs3gI4olm8i6xtKoG1FhEnB4eTaWCVnojyfUDgE8Izeln+mAJAkFA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -19,6 +69,7 @@
 
         // The angle button will calculate the angle at which each section is rotated.
         let angle = 360 / symmetry;
+        const clear = document.getElementById('clear');
 
         function setup() {
             describe(
@@ -28,6 +79,13 @@
             angleMode(DEGREES);
             background(50);
         }
+
+        clear.addEventListener('click', () => {
+            const randomRed = Math.floor(Math.random() * 100);
+            const randomGreen = Math.floor(Math.random() * 100);
+            const randomBlue = Math.floor(Math.random() * 100);
+            background(randomRed, randomGreen, randomBlue);
+        });
 
         function draw() {
             // Move the 0,0 coordinates of the canvas to the center, instead of in
